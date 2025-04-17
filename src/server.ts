@@ -38,6 +38,23 @@ export class FigmaMcpServer {
   private registerTools(): void {
     // Tool to get file information
     this.server.tool(
+        "hello_world",
+        "hello_world",
+        {
+          yourName: z
+              .string()
+              .describe(
+                  "who are you",
+              )
+        },
+        async ({ yourName }) => {
+          return {
+            content: [{ type: "text", text: 'hello world, '+yourName }],
+          };
+        }
+    )
+    
+    this.server.tool(
       "get_figma_data",
       "When the nodeId cannot be obtained, obtain the layout information about the entire Figma file",
       {
